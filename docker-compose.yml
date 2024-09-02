@@ -1,0 +1,32 @@
+services:
+  nginx:
+    image: nginx:1.27.1-alpine3.20@sha256:c04c18adc2a407740a397c8407c011fc6c90026a9b65cceddef7ae5484360158
+    container_name: linktank-nginx
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./app:/var/www/
+      - ./nginx/logs:/var/log/nginx/
+    networks:
+      - app
+
+  app:
+    build:
+     context: .
+     dockerfile: Dockerfile
+    container_name: linktank-app
+    working_dir: /var/www
+    user: "1000:1000"
+    restart: always
+    volumes:
+      - ./app:/var/www
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
