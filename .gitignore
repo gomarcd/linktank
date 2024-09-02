@@ -1,10 +1,7 @@
-/.env.local
-/.env.local.php
-/.env.*.local
+**/.env
+!.env.example
 /app/vendor/
 /app/storage
 /app/database
-/app/.env
-/app/.env.local
 /app/.editorconfig
 /nginx/logs
