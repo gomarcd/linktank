@@ -1,5 +1,7 @@
 **/.env
 !.env.example
+/frankenphp-config
+/frankenphp-data
 /app/node_modules
 /app/public/build
 /app/public/hot
