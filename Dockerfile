@@ -1,7 +1,7 @@
 FROM node:22.7.0-bullseye@sha256:85d8c25be9ef5e3262fc6907b4ca3b1a40ad925b02e3b8965a15ea0068ea8574 AS node
 RUN npm install -g npm@10.8.3
 FROM php:8.3.10-fpm-bullseye@sha256:857b7cdf42fc4e5b313548e6f6260fce0534439e30915824a5ac3efe9a121dff AS php
-ENV NPM_CONFIG_CACHE=/var/www/.npm
+ENV NPM_CONFIG_CACHE=/tmp/.npm
 COPY --from=node /usr/local/bin/ /usr/local/bin/
 COPY --from=node /usr/local/lib/ /usr/local/lib/
 
