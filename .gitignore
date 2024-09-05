@@ -1,7 +1,11 @@
 **/.env
 !.env.example
+/app/node_modules
+/app/public/build
+/app/public/hot
 /app/vendor/
 /app/storage
+!/app/storage/app/public
 /app/database
 /app/.editorconfig
 /nginx/logs
