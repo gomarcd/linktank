@@ -17,6 +17,9 @@ docker-compose.yml
 !/app/storage/framework/testing
 !/app/storage/logs
 !/app/storage/app/public
-/app/database
+/app/database/*.sqlite
+!/app/database/migrations/
+!/app/database/seeders/
+!/app/database/factories/
 /app/.editorconfig
 /nginx/logs
