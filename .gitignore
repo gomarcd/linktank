@@ -14,6 +14,7 @@ docker-compose.yml
 !/app/storage/framework/cache
 !/app/storage/framework/sessions
 !/app/storage/framework/views
+!/app/storage/framework/testing
 !/app/storage/logs
 !/app/storage/app/public
 /app/database
