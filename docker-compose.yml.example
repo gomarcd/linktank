@@ -5,8 +5,8 @@ services:
     restart: always
     ports:
       - "80:80"
-#      - "443:443"
-#      - "443:443/udp"
+      - "443:443"
+      - "443:443/udp"
     depends_on:
       - app
     volumes:
@@ -14,8 +14,8 @@ services:
       - ./frankenphp-data:/data
       - ./frankenphp-config:/config
 # Uncomment below if needing to disable auto-https from inside this container
-    environment:
-      SERVER_NAME: :80
+#    environment:
+#      SERVER_NAME: :80
     networks:
       - app
 
