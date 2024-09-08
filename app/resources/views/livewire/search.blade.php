@@ -3,6 +3,8 @@
     <input wire:model.live="search" type="text" placeholder="Search bookmarks...">
     <br>
     
+
+
     <br>
     @foreach ($this->getBookmarks as $bookmark)
         <br>
@@ -33,11 +35,12 @@
                                 />
                             </svg>
                         </button>
-                    @endif
+                    @endif                 
                 </td>
             </tr>
         </table>
+  
     @endforeach
-
+ 
     <div x-intersect.full="$wire.loadMore()"></div>
 </div>

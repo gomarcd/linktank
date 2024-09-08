@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Masmerise\Toaster\Toaster;
 use Livewire\Attributes\Computed; 
 use Illuminate\Support\Collection;
 use Livewire\Component;
@@ -13,7 +14,7 @@ class Search extends Component
     use WithPagination;
 
     public $search = '';
-    public int $on_page = 25; 
+    public int $on_page = 10; 
 
     public function updatingSearch()
     {
@@ -24,6 +25,7 @@ class Search extends Component
     {
         $bookmark = Bookmark::findOrFail($id);
         $bookmark->delete();
+        Toaster::error('Bookmark deleted!');
     }
 
     public function undoDelete($id)
@@ -34,14 +36,13 @@ class Search extends Component
 
     public function loadMore()
     {  
-        $this->on_page += 25;  
+        $this->on_page += 15;  
     }
 
     #[Computed]
     public function getBookmarks(): Collection
     {
-        return Bookmark::withTrashed()
-        ->where(function($query) {
+        return Bookmark::where(function($query) {
             $query->where('title', 'like', '%' . $this->search . '%')
                   ->orWhere('description', 'like', '%' . $this->search . '%')
                   ->orWhere('url', 'like', '%' . $this->search . '%');
