@@ -25,7 +25,7 @@ class Search extends Component
     {
         $bookmark = Bookmark::findOrFail($id);
         $bookmark->delete();
-        Toaster::error('Bookmark deleted!');
+        Toaster::info('Bookmark deleted!');
     }
 
     public function undoDelete($id)
