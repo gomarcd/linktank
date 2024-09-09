@@ -15,8 +15,7 @@ class Search extends Component
 
     public $search = '';
     public int $on_page = 10;
-    public $lastDeletedId;
-    public $showUndoButton = false;
+    protected $listeners = ['undodelete'];
 
     public function updatingSearch()
     {
@@ -27,22 +26,16 @@ class Search extends Component
     {
         $bookmark = Bookmark::findOrFail($id);
         $bookmark->delete();
-        $this->lastDeletedId = $id;
-        $this->showUndoButton = true;
-        session()->flash('status', 'Deleted');
-        Toaster::info('Bookmark deleted');
+
+        Toaster::info('Bookmark deleted. <button x-on:click=\'$dispatch("undodelete", { id: ' . $bookmark->id . ' })\'><b>UNDO</b></button>');
     }
 
-    public function undoDelete()
+    public function undodelete($id)
     {
-        if ($this->lastDeletedId) {
-            $bookmark = Bookmark::withTrashed()->findOrFail($this->lastDeletedId);
-            $bookmark->restore();
-
-            // Clear the last deleted ID and hide the undo button
-            $this->lastDeletedId = null;
-            $this->showUndoButton = false;
-        }
+        $bookmark = Bookmark::withTrashed()->findOrFail($id);
+        $bookmark->restore();
+        
+        Toaster::success('Bookmark restored!');
     }
 
     public function loadMore()

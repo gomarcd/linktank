@@ -6,18 +6,6 @@
         </label>
     </div>
 
-    @if ($showUndoButton)
-        @if(session('status'))
-            <div x-data="{ countdown: 5, show: true }" x-init="let timer = setInterval(() => { countdown--; if (countdown <= 0) { show = false; clearInterval(timer); } }, 1000)" x-show="show" class="block items-center p-4 border border-warning rounded-lg mb-4">
-                <button class="text-center w-full py-2 border " wire:click="undoDelete" @click="Toaster.success('Restored!')">
-                    Undo (<span x-text="countdown"></span>)
-                </button>
-            </div>
-        @endif
-    @endif
-
-
-
     @foreach ($this->getBookmarks as $bookmark)
         <div class="flex justify-between items-start p-4 border border-accent rounded-lg mb-4">
             <div class="w-4/5 ml-1">
