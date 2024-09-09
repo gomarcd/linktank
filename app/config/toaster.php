@@ -28,7 +28,7 @@ return [
      *
      * Minimum: 3000 (in milliseconds)
      */
-    'duration' => 3000,
+    'duration' => 10000,
 
     /**
      * The horizontal position of each toast.

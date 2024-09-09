@@ -14,7 +14,9 @@ class Search extends Component
     use WithPagination;
 
     public $search = '';
-    public int $on_page = 10; 
+    public int $on_page = 10;
+    public $lastDeletedId;
+    public $showUndoButton = false;
 
     public function updatingSearch()
     {
@@ -25,13 +27,22 @@ class Search extends Component
     {
         $bookmark = Bookmark::findOrFail($id);
         $bookmark->delete();
-        Toaster::info('Bookmark deleted!');
+        $this->lastDeletedId = $id;
+        $this->showUndoButton = true;
+        session()->flash('status', 'Deleted');
+        Toaster::info('Bookmark deleted');
     }
 
-    public function undoDelete($id)
+    public function undoDelete()
     {
-        $bookmark = Bookmark::withTrashed()->findOrFail($id);
-        $bookmark->restore();
+        if ($this->lastDeletedId) {
+            $bookmark = Bookmark::withTrashed()->findOrFail($this->lastDeletedId);
+            $bookmark->restore();
+
+            // Clear the last deleted ID and hide the undo button
+            $this->lastDeletedId = null;
+            $this->showUndoButton = false;
+        }
     }
 
     public function loadMore()
