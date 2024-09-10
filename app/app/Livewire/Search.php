@@ -15,6 +15,11 @@ class Search extends Component
 
     public $search = '';
     public int $on_page = 10;
+    public $bookmark_id;
+    public $title;
+    public $url;
+    public $description;
+    public $showModal = false;
     protected $listeners = ['undodelete'];
 
     public function updatingSearch()
@@ -27,7 +32,7 @@ class Search extends Component
         $bookmark = Bookmark::findOrFail($id);
         $bookmark->delete();
 
-        Toaster::info('Bookmark deleted. <button x-on:click=\'$dispatch("undodelete", { id: ' . $bookmark->id . ' })\'><b>UNDO</b></button>');
+        Toaster::info('<div x-on:click="toast.dispose(); $dispatch(\'undodelete\', { id: ' . $bookmark->id . ' })" style="cursor: pointer;">Deleted ' . e($bookmark->title) . '. <b>UNDO</b></div>');
     }
 
     public function undodelete($id)
@@ -35,12 +40,35 @@ class Search extends Component
         $bookmark = Bookmark::withTrashed()->findOrFail($id);
         $bookmark->restore();
         
-        Toaster::success('Bookmark restored!');
+        Toaster::success('Restored: ' . e($bookmark->title) . '.');
     }
 
     public function loadMore()
     {  
         $this->on_page += 15;  
+    }
+
+    public function editBookmark($id)
+    {
+        $bookmark = Bookmark::find($id);
+        $this->bookmark_id = $bookmark->id;
+        $this->title = $bookmark->title;
+        $this->url = $bookmark->url;
+        $this->description = $bookmark->description;
+    }
+
+    public function updateBookmark()
+    {
+        $bookmark = Bookmark::find($this->bookmark_id);
+        if ($bookmark) {
+            $bookmark->update([
+                'title' => $this->title,
+                'url' => $this->url,
+                'description' => $this->description,
+            ]);
+            $this->showModal = false;
+            Toaster::success('Updated: ' . e($bookmark->title) . '.');
+        }
     }
 
     #[Computed]
