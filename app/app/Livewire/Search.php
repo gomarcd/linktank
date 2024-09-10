@@ -16,9 +16,9 @@ class Search extends Component
     public $search = '';
     public int $on_page = 10;
     public $bookmark_id;
-    public $title;
-    public $url;
-    public $description;
+    public $title ='';
+    public $url ='';
+    public $description ='';
     public $showModal = false;
     protected $listeners = ['undodelete'];
 
@@ -29,10 +29,14 @@ class Search extends Component
 
     public function delete($id)
     {
-        $bookmark = Bookmark::findOrFail($id);
-        $bookmark->delete();
-
-        Toaster::info('<div x-on:click="toast.dispose(); $dispatch(\'undodelete\', { id: ' . $bookmark->id . ' })" style="cursor: pointer;">Deleted ' . e($bookmark->title) . '. <b>UNDO</b></div>');
+        try {
+            $bookmark = Bookmark::findOrFail($id);    
+            $bookmark->delete();
+            Toaster::info('<div x-on:click="toast.dispose(); $dispatch(\'undodelete\', { id: ' . $bookmark->id . ' })" style="cursor: pointer;">Deleted ' . e($bookmark->title) . '. <b>UNDO</b></div>');
+    
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return;
+        }
     }
 
     public function undodelete($id)
@@ -55,10 +59,11 @@ class Search extends Component
         $this->title = $bookmark->title;
         $this->url = $bookmark->url;
         $this->description = $bookmark->description;
+        $this->showModal = true;
     }
 
     public function updateBookmark()
-    {
+    {        
         $bookmark = Bookmark::find($this->bookmark_id);
         if ($bookmark) {
             $bookmark->update([
