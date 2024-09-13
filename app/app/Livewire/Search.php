@@ -20,6 +20,7 @@ class Search extends Component
     public $url ='';
     public $description ='';
     public $showModal = false;
+    public $isEditingId = null;
     protected $listeners = ['undodelete'];
 
     public function updatingSearch()
@@ -52,28 +53,42 @@ class Search extends Component
         $this->on_page += 15;  
     }
 
+    public function addBookmark()
+    {
+        // Add some validation
+
+        // Create bookmark
+        $this->showModal = true;
+        Bookmark::create([
+            'title' => $this->title,
+            'url' => $this->url,
+            'description' => $this->description,
+        ]);
+        Toaster::success('Added: ' . e($this->url) . '.');
+    }
+
     public function editBookmark($id)
     {
+        $this->isEditingId = $id;
+        // $this->showModal = true;
         $bookmark = Bookmark::find($id);
         $this->bookmark_id = $bookmark->id;
         $this->title = $bookmark->title;
         $this->url = $bookmark->url;
         $this->description = $bookmark->description;
-        $this->showModal = true;
+        
     }
 
     public function updateBookmark()
     {        
         $bookmark = Bookmark::find($this->bookmark_id);
-        if ($bookmark) {
-            $bookmark->update([
-                'title' => $this->title,
-                'url' => $this->url,
-                'description' => $this->description,
-            ]);
-            $this->showModal = false;
-            Toaster::success('Updated: ' . e($bookmark->title) . '.');
-        }
+        $bookmark->update([
+            'title' => $this->title,
+            'url' => $this->url,
+            'description' => $this->description,
+        ]);
+        $this->showModal = false;
+        Toaster::success('Updated: ' . e($bookmark->title) . '.');
     }
 
     #[Computed]
