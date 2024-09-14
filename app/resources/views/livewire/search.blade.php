@@ -1,9 +1,9 @@
-<div class="w-7/12 mx-auto pl-7" x-data="{ isEditingId: @entangle('isEditingId') }" @click.away="isEditingId = null">
+<div class="w-8/12 mx-auto pl-7" x-data="{ isEditingId: @entangle('isEditingId') }" @click.away="isEditingId = null">
 
     <!-- Search bar + add button container -->
     <div class="flex mt-8 mb-4">
         <!-- Search bar -->
-        <div class="flex self-center w-11/12 border border-4 border-transparent ring-1 ring-neutral rounded-lg focus-within:border-double focus-within:border-primary">
+        <div class="flex self-center w-11/12 border-4 border-transparent ring-1 ring-neutral rounded-lg focus-within:border-double focus-within:border-primary">
             <label for="search" class="w-full flex items-center">
                 <input type="text" id="search" name="search" 
                     wire:model.live="search" 
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Add button -->
-        <div class="self-center hover:text-success">
+        <div class="mx-auto flex items-center hover:text-success">
             <label for="add_bookmark_modal" class="cursor-pointer">
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
@@ -49,7 +49,7 @@
         <div x-data="{ hover: false }"
             @mouseenter="hover = true"
             @mouseleave="hover = false"
-            class="flex mb-4 w-full"
+            class="flex mb-4 w-full borders"
             wire:key="bookmark-{{ $bookmark->id }}"
             >
             
@@ -84,7 +84,7 @@
 
             <!-- Right side button container appears on hover -->
             <template x-if="hover">
-                <div :class="hover ? 'flex':'hidden'" class="flex flex-col justify-center gap-2 ml-3">
+                <div :class="hover ? 'flex':'hidden'" class="flex flex-col justify-center gap-2 mx-auto">
                     <!-- Edit Button -->
                     <div class="cursor-pointer" @click="isEditingId = {{ $bookmark->id }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 hover:text-warning">
