@@ -55,22 +55,18 @@ class Search extends Component
 
     public function addBookmark()
     {
-        // Add some validation
-
-        // Create bookmark
-        $this->showModal = true;
         Bookmark::create([
             'title' => $this->title,
             'url' => $this->url,
             'description' => $this->description,
         ]);
         Toaster::success('Added: ' . e($this->url) . '.');
+        return $this->redirect('/search');
     }
 
     public function editBookmark($id)
     {
         $this->isEditingId = $id;
-        // $this->showModal = true;
         $bookmark = Bookmark::find($id);
         $this->bookmark_id = $bookmark->id;
         $this->title = $bookmark->title;
@@ -87,7 +83,6 @@ class Search extends Component
             'url' => $this->url,
             'description' => $this->description,
         ]);
-        $this->showModal = false;
         Toaster::success('Updated: ' . e($bookmark->title) . '.');
     }
 

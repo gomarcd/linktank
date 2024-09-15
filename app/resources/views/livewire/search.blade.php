@@ -1,4 +1,8 @@
-<div class="w-8/12 mx-auto pl-7" x-data="{ isEditingId: @entangle('isEditingId') }" @click.away="isEditingId = null">
+<div
+    class="w-8/12 mx-auto pl-7"
+    x-data="{ isEditingId: @entangle('isEditingId'), isAddingNewItem: false }"
+    @click.away="isEditingId = null"
+    >
 
     <!-- Search bar + add button container -->
     <div class="flex mt-8 mb-4">
@@ -32,20 +36,31 @@
         </div>
 
         <!-- Add button -->
-        <div class="mx-auto flex items-center hover:text-success">
-            <label for="add_bookmark_modal" class="cursor-pointer">
-                <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke-width="1.5" 
-                    stroke="currentColor" 
-                    class="size-8">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-            </label>
+        <div class="mx-auto flex items-center hover:text-success" @click="isAddingNewItem = true; $nextTick(() => $refs.addBookmarkField.focus())">
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                class="size-8 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
         </div>
     </div>
+
+    <!-- Add new item form -->
+    <div x-show="isAddingNewItem" class="w-11/12 mt-4 mb-4 p-4 border-4 border-transparent ring-1 ring-neutral rounded-lg hover:ring-primary focus-within:border-double focus-within:border-primary">
+            <input type="text" wire:model="url" id="addBookmark" name="addBookmark" placeholder="Enter URL"
+                class="p-2 text-center grow bg-base-100 rounded-lg w-full
+                border-4 border-primary ring-1 ring-transparent placeholder:text-neutral
+                focus:outline-none focus:border-4 focus:border-double focus:border-primary
+                hover:placeholder-green-900" x-ref="addBookmarkField" @keydown.escape="isAddingNewItem = false" />
+            <div class="flex justify-end mt-2 gap-2">
+                <button wire:loading.attr="disabled" wire:click="addBookmark" class="btn btn-outline btn-neutral btn-sm">Add</button>
+                <button @click="isAddingNewItem = false" class="btn btn-outline btn-error btn-sm">Cancel</button>
+            </div>
+    </div>    
 
     @if($this->getBookmarks()->isEmpty())
         <div class="w-11/12 flex justify-center prose lg:prose-xl">
@@ -110,62 +125,6 @@
             </div>
         @endforeach
     @endif
-
-    <!-- Add Bookmark Modal -->
-    <input type="checkbox" wire:loading.remove wire:target="addBookmark" id="add_bookmark_modal" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box">
-                <h3 class="text-lg font-bold mb-4">Add Bookmark</h3>
-                <form wire:submit="addBookmark">
-                    <div class="mb-4">
-                        <label for="title" class="block mb-1">Title</label>
-                        <input type="text" id="title" class="input input-bordered w-full" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="url" class="block mb-1">URL</label>
-                        <input type="text" id="url" class="input input-bordered w-full" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="description" class="block mb-1">Description</label>
-                        <textarea id="description" class="textarea textarea-bordered w-full"></textarea>
-                    </div>
-                    <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <label for="add_bookmark_modal" class="btn">Cancel</label>
-                    </div>
-                </form>
-            </div>
-            <label class="modal-backdrop" for="add_bookmark_modal">Close</label>
-        </div>    
-
-    <!-- Edit Bookmark Modal -->
-     @if($showModal)
-    <input type="checkbox" wire:model="showModal" id="edit_bookmark_modal" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box" >
-                <h3 class="text-lg font-bold mb-4">Edit Bookmark</h3>
-                <form wire:submit="updateBookmark">
-                    <div class="mb-4">
-                        <label for="title" class="block mb-1">Title</label>
-                        <input type="text" id="title" wire:model="title" class="input input-bordered w-full" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="url" class="block mb-1">URL</label>
-                        <input type="text" id="url" wire:model="url" class="input input-bordered w-full" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="description" class="block mb-1">Description</label>
-                        <textarea id="description" wire:model="description" class="textarea textarea-bordered w-full"></textarea>
-                    </div>
-                    <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <label for="edit_bookmark_modal" class="btn">Cancel</label>
-                    </div>
-                </form>
-            </div>
-            <label class="modal-backdrop" for="edit_bookmark_modal">Close</label>
-        </div>
-        @endif
 
     <!-- Infinite scroll trigger -->
     <div class="h-16" x-intersect.full="$wire.loadMore()"></div>
