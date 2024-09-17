@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+     context: .
+     dockerfile: Dockerfile
+     target: dev
+    container_name: linktank-dev
+    user: "1000:1000"
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+      - "5173:5173"
+    volumes:
+      - ./app:/app
+      - ./frankenphp-data:/data
+      - ./frankenphp-config:/config
+# Uncomment below if needing to disable auto-https from inside this container
+#    environment:
+#      SERVER_NAME: :80
