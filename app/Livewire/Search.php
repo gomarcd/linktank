@@ -61,7 +61,7 @@ class Search extends Component
             'description' => $this->description,
         ]);
         Toaster::success('Added: ' . e($this->url) . '.');
-        return $this->redirect('/search');
+        return $this->redirect('/');
     }
 
     public function editBookmark($id)
