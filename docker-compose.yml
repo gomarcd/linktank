@@ -1,0 +1,12 @@
+services:
+  app:
+    image: gomarcd/linktank:dev
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+      - "5173:5173"
+    volumes:
+      - ./:/app
+      - ./frankenphp-data:/data
+      - ./frankenphp-config:/config
