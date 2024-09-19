@@ -10,3 +10,9 @@ ENV COMPOSER_HOME=/tmp/composer
 ENV XDG_CONFIG_HOME=/tmp/.config
 
 COPY ./ /app
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --optimize-autoloader --no-dev \
+    && mkdir -p storage/logs \
+    && php artisan optimize:clear \
+    && npm install

@@ -22,3 +22,7 @@ docker-compose.yml
 !/database/seeders/
 !/database/factories/
 .editorconfig
+/.fly
+/.github
+.dockerignore
+fly.toml
