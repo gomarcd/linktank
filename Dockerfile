@@ -1,5 +1,7 @@
 FROM dunglas/frankenphp
-RUN apt-get update && apt-get install -y git curl zip unzip
+RUN apt-get update && apt-get install -y git curl zip unzip libzip-dev \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip
 
 COPY --from=node /usr/local/bin/ /usr/local/bin/
 COPY --from=node /usr/local/lib/ /usr/local/lib/
@@ -12,7 +14,6 @@ ENV XDG_CONFIG_HOME=/tmp/.config
 COPY ./ /app
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN composer install --optimize-autoloader --no-dev \
+RUN composer install \
     && mkdir -p storage/logs \
-    && php artisan optimize:clear \
     && npm install
