@@ -13,7 +13,7 @@ console_command = 'php /var/www/html/artisan tinker'
     PHP_VERSION = '8.3'
 
 [deploy]
-  release_command = "touch database/database.sqlite"
+  release_command = "touch /app/database/database.sqlite"
 
 [env]
   APP_ENV = 'production'
