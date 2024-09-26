@@ -12,9 +12,6 @@ console_command = 'php /var/www/html/artisan tinker'
     NODE_VERSION = '22'
     PHP_VERSION = '8.3'
 
-[deploy]
-  release_command = "touch /app/database/database.sqlite"
-
 [env]
   APP_ENV = 'production'
   LOG_CHANNEL = 'stderr'
