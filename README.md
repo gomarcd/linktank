@@ -38,3 +38,11 @@ To tinker with code, just clone down the repo if you're up to that or head over 
 Any support here is always deeply appreciated too:
 
 <a href="https://www.buymeacoffee.com/gomarcd" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+And :star: the repo up top if you like this idea!
+
+## Community
+
+For now, it's just me so feel free to follow on Twitter:
+
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/gomarcd.svg?style=social&label=Follow%20%40gomarcd)](https://twitter.com/gomarcd)
