@@ -33,7 +33,7 @@ Just tinkering with different ideas, environment, workflow right now.
 
 ## Contribute
 
-To tinker with code, just clone downt he repo if you're up to that or head over to the [Wiki](https://github.com/gomarcd/linktank/wiki) and choose your adventure.
+To tinker with code, just clone down the repo if you're up to that or head over to the [Wiki](https://github.com/gomarcd/linktank/wiki) and choose your adventure.
 
 Any support here is always deeply appreciated too:
 
