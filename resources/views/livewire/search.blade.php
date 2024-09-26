@@ -7,6 +7,8 @@
     <!-- Search bar + add button container -->
     <div class="flex mt-8 mb-4">
         <!-- Search bar -->
+
+
         <div class="flex self-center w-11/12
                     border-4 border-transparent ring-1 ring-neutral rounded-lg
                     hover:ring-primary
@@ -72,7 +74,7 @@
             <div x-data="{ hover: false }"
                 @mouseenter="hover = true"
                 @mouseleave="hover = false"
-                class="flex mb-4 w-full borders"
+                class="flex mt-6 mb-6 w-full borders"
                 wire:key="bookmark-{{ $bookmark->id }}"
                 >
                 

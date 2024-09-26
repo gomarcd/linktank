@@ -6,11 +6,13 @@
 
         <title>{{ $title ?? 'LinkTank' }}</title>
         @livewireStyles
+        @fluxStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
         {{ $slot }}
         <x-toaster-hub />
+        @fluxScripts
         @livewireScriptConfig
     </body>
 </html>

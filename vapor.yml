@@ -1,0 +1,15 @@
+id: 65574
+name: LinkTank
+environments:
+    production:
+        memory: 1024
+        cli-memory: 512
+        warm: 2
+        runtime: 'php-8.3:al2'
+        build:
+            - 'composer install --no-dev'
+            - 'npm ci && npm run build && rm -rf node_modules'
+        database: linktank
+        deploy:
+            - 'php artisan migrate --force'
+            - 'php artisan db:seed --class=BookmarkSeeder --force --no-interaction'

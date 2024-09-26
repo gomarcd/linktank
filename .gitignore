@@ -1,6 +1,5 @@
 **/.env
 !.env.example
-docker-compose.yml
 /frankenphp-config
 /frankenphp-data
 /bootstrap/cache/*
@@ -22,7 +21,6 @@ docker-compose.yml
 !/database/seeders/
 !/database/factories/
 .editorconfig
-/.fly
-/.github
 .dockerignore
-fly.toml
+.fly
+auth.json

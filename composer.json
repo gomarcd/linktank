@@ -8,6 +8,10 @@
         "php": "^8.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "laravel/vapor-cli": "^1.65",
+        "laravel/vapor-core": "^2.37",
+        "livewire/flux": "^1.0",
+        "livewire/flux-pro": "^1.0",
         "livewire/livewire": "^3.5",
         "livewire/volt": "^1.6",
         "masmerise/livewire-toaster": "^2.3",
@@ -27,7 +31,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "exclude-from-classmap": [
+            "vendor/fly-apps/dockerfile-laravel/app/Providers/AppServiceProvider.php"
+        ]        
     },
     "autoload-dev": {
         "psr-4": {
@@ -66,5 +73,11 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "flux-pro": {
+            "type": "composer",
+            "url": "https://composer.fluxui.dev"
+        }
+    }
 }

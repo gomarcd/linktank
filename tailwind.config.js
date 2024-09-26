@@ -6,7 +6,9 @@ export default {
 			"./resources/**/*.js",
 			"./resources/**/*.vue",
 			"./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
-			"./vendor/robsontenorio/mary/src/View/Components/**/*.php"
+			"./vendor/robsontenorio/mary/src/View/Components/**/*.php",
+	        "./vendor/livewire/flux-pro/stubs/**/*.blade.php",
+	        "./vendor/livewire/flux/stubs/**/*.blade.php"			
 		],
 	theme: {
 		extend: {},
