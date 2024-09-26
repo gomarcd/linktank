@@ -19,7 +19,7 @@ Just tinkering with different ideas, environment, workflow right now.
 
 :white_check_mark: reproducible environment: Docker, Laravel, Livewire, Flux, Tailwind
 
-:white_check_mark: deployment: [Fly.io](https://fly.io)
+:white_check_mark: deployment: currently testing [Fly.io](https://fly.io) & [Laravel Vapor](https://vapor.laravel.com/)
 
 :white_check_mark: functionality: display, add, edit, delete, undo
 
